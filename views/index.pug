@@ -1,0 +1,37 @@
+extends layout/index
+block speakerslist
+  article.speakerslist.jumbotron.hidden-xs
+    .container
+      .row
+        each speaker in speakerList
+          .col-sm-4.text-center
+            h3.speakerslist-title=speaker.title
+            h5.speakerslist-name
+              | with &nbsp;
+              a(href=`/speakers/${speaker.shortname}`)=speaker.name
+            p.speakerslist-info
+              a(href=`/speakers/${speaker.shortname}`)
+                img.speakerslist-img.img-circle(src=`/images/speakers/${speaker.shortname}_tn.jpg`, alt=`Photo of ${speaker.name}`)
+      
+block home
+  .container#home
+    .row
+      .col-sm-8
+        .maincontent
+          article.article
+            h1.article-title Who are we?
+            p The Roux Academy gets thousands of submissions every year for artists interesting in participating in the CAC       exhibits, and selects approximately 200 distinct pieces of contemporary art for display in their collective exhibit. In addition, 12 individuals are chosen as Featured Artists - each being granted his or her own exhibit hall to display entire collections or themed pieces.
+            
+            p Each Featured Artist has an opportunity to speak at one of our meetups and share his or her vision, perspective, and technique with needs on a more personal level than at our large conference. It is truly an honor to be a CAC Featured Artist and many past student artists who were featured at CAC have gone on to brilliant careers in art.      
+          article.article
+            h1.article-title Get Busy!
+            p
+              | If you want to keep up with what's going on with the group,
+              a(href='http://www.meetup.com/rouxmeet') join our meetup group
+              | ,
+              a(href='http://www.twitter.com/rouxmeet') &nbsp; follow us on twitter
+              | . If you're in FaceBook, you can also
+              a(href='http://www.facebook.com/rouxmeet') &nbsp; join our FaceBook group
+              | .
+      // primary 
+      include includes/sidebar

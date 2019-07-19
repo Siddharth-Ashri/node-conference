@@ -1,0 +1,40 @@
+extends ../layout/index
+block home
+    .container#feedback
+      .row 
+        .col-sm-4
+          if error 
+             .alert.alert-danger 
+               | Error! There was an error handling your request. Did you forget to fill out a field?
+          else if success
+              .alert.alert-success
+                | Thank you! we appreciate your feedback.
+          h1.feedback-form-title Send us feedback
+          form.feedback-form(action='/feedback',method='POST')
+            .form-group
+              label(for='feedback-form-name') Name
+              input.form-control#feedback-form-name(type='text', placeholder='Enter your name', name='fbName', value=fbName)
+            .form-group
+              label(for='feedback-form-title') Title
+              input.form-control#feedback-form-title(type='text', placeholder='Title of your feedback', name='fbTitle'    value=fbTitle)
+            .form-group
+              label(for='feedback-form-message') Message
+              textarea.form-control#feedback-form-message(type='text', placeholder='Enter your message, then hit the submit',   rows='6', name='fbMessage')=fbMessage
+            button.btn.btn-default.pull-right(type='submit') Submit
+      
+        aside.col-sm-8
+          .maincontent.feedback
+            h2.article-title Recent Feedback
+            if !feedback || !feedback.length
+              |No feedback so far! be the first.
+            else
+              .feedback-messages
+              each userFeedback in feedback
+                .feedback-item.item-list.media-list
+                  .feedback-item.media
+                    .feedback-info.media-body
+                      .feedback-head
+                        .feedback-title
+                          | #{userFeedback.title}&nbsp;
+                          small.feedback-name.label.label-info=userFeedback.name
+                      .feedback-message=userFeedback.message
